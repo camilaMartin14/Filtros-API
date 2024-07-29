@@ -1,5 +1,5 @@
 package com.filtrosapi.filtros.repository;
 
-public interface IUsuariosRepository {
+public interface IUsuarioRepository {
     
 }
