@@ -15,15 +15,15 @@ public class Usuario {
     private LocalDate fechaRegistro;
     private LocalDate fechaBaja;
     private LocalDate fechaNacimieno;
-    private int dni;
-    private int cuil;
+    private String dni;
+    private String cuil;
     private boolean estaActivo;
     
     
     public Usuario() {
     }
 
-    public Usuario(long id, String nombre, String apellido, LocalDate fechaRegistro, LocalDate fechaNacimieno, int dni, int cuil) {
+    public Usuario(long id, String nombre, String apellido, LocalDate fechaRegistro, LocalDate fechaNacimieno, String dni, String cuil) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;

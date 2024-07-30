@@ -22,11 +22,17 @@ public interface IUsuarioService {
     public void findByFechaRegistro(Long codigoVenta, List<Usuario> listaProductos);
     
     public double findByMenoresEdad(LocalDate fecha);
+    
+    public String[] findByDni (String[] documentos,String valor);
 
     public int findByMayoresEdad(LocalDate fecha);
 
     public ArrayList<Usuario> findByFechaRegistro(ArrayList<Usuario> listaUsuarios, LocalDate fechaBusqueda);
     
     public ArrayList<Usuario> findByFechaBaja(ArrayList<Usuario> listaUsuarios, LocalDate fechaBusqueda);
+    
+    public int countCifrasDni (int numeroCifrasIngresado);
+    
+    public String fillDniConCeros (int numeroMaximoCifras, int numeroCifrasIngresado);
     
 }
