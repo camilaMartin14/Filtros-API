@@ -15,9 +15,18 @@ public interface IUsuarioService {
     
     public void deleteUsuario(Long id);
     
-    public void editUsuario();
+    public void editUsuario(long id,
+                            long nuevoId,
+                            String nuevoNombre,
+                            String nuevoApellido,
+                            LocalDate nuevaFechaRegistro,
+                            LocalDate nuevaFechaBaja,
+                            LocalDate nuevaFechaNacimiento,
+                            String nuevoDni,
+                            String nuevoCuil,
+                            boolean nuevoEstaActivo);
     
-    public void editUsuario(Long id);
+    public void editUsuario(Usuario usu);
     
     public void findByFechaRegistro(Long codigoVenta, List<Usuario> listaProductos);
     
@@ -34,5 +43,7 @@ public interface IUsuarioService {
     public int countCifrasDni (int numeroCifrasIngresado);
     
     public String fillDniConCeros (int numeroMaximoCifras, int numeroCifrasIngresado);
+    
+    public int getCantidadSuscripcionesEnFecha(LocalDate fechaRegistro);
     
 }

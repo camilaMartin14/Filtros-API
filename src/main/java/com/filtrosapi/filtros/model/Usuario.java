@@ -1,6 +1,7 @@
 package com.filtrosapi.filtros.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Getter@Setter
 public class Usuario {
     
+    @Id
     private long id;
     private String nombre;
     private String apellido;
