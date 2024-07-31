@@ -51,4 +51,6 @@ public interface IUsuarioService {
     public boolean mesCorrecto(int mes);
     
     public boolean esBisiesto(int anio);
+    
+    public List<Usuario> findByFechaRegistroEntre(LocalDate fechaInicio, LocalDate fechaFin);
 }

@@ -271,4 +271,14 @@ public class UsuarioService implements IUsuarioService{
         return (anio % 4 == 0 && anio % 100 != 0) || (anio % 100 == 0 && anio % 400 == 0);
     }
 
+    @Override
+    public List<Usuario> findByFechaRegistroEntre(LocalDate fechaInicio, LocalDate fechaFin) {
+        // Validar que fechaInicio no sea después de fechaFin
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
+        }
+
+        return usuRepo.findByFechaRegistroBetween(fechaInicio, fechaFin);
+    }
+
 }
