@@ -28,8 +28,6 @@ public interface IUsuarioService {
     
     public void editUsuario(Usuario usu);
     
-    public void findByFechaRegistro(Long codigoVenta, List<Usuario> listaProductos);
-    
     public double findByMenoresEdad(LocalDate fecha);
     
     public String[] findByDni (String[] documentos,String valor);

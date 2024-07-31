@@ -71,19 +71,74 @@ public class UsuarioService implements IUsuarioService{
 
     }
 
-    @Override
-    public void findByFechaRegistro(Long codigoVenta, List<Usuario> listaProductos) {
-
-    }
-
+    //no me devuelve los nombres de usuarios menores sino la cantidad registrados
     @Override
     public double findByMenoresEdad(LocalDate fecha) {
+    List<Usuario> listaUsuarios = usuRepo.findAll();
+    int contadorMenores = 0;
 
+    for (Usuario usuario : listaUsuarios) {
+        LocalDate fechaNacimiento = usuario.getFechaNacimiento();
+        if (fechaNacimiento != null && esMenor(fechaNacimiento, fecha)) {
+            contadorMenores++;
+        }
+    }
+
+    return (double) contadorMenores;
+    }
+
+    /**
+     * Método auxiliar para determinar si una fecha de nacimiento indica que la persona es menor
+     * de edad en la fecha proporcionada.
+     *
+     * @param fechaNacimiento La fecha de nacimiento del usuario.
+     * @param fechaReferencia La fecha de referencia para calcular la edad.
+     * @return true si el usuario es menor de edad en la fecha proporcionada.
+     */
+    private boolean esMenor(LocalDate fechaNacimiento, LocalDate fechaReferencia) {
+        // Calcula la edad
+        int edad = fechaReferencia.getYear() - fechaNacimiento.getYear();
+        if (fechaNacimiento.plusYears(edad).isAfter(fechaReferencia)) {
+            edad--;
+        }
+
+        // Suponemos que "menor de edad" es menos de 18 años. Ajusta según tu definición.
+        return edad < 18;
     }
 
     @Override
     public int findByMayoresEdad(LocalDate fecha) {
+            
+    List<Usuario> listaUsuarios = usuRepo.findAll();
+    int contadorMayores = 0;
 
+    for (Usuario usuario : listaUsuarios) {
+        LocalDate fechaNacimiento = usuario.getFechaNacimiento();
+        if (fechaNacimiento != null && esMayor(fechaNacimiento, fecha)) {
+            contadorMayores++;
+        }
+    }
+
+    return contadorMayores;
+    }
+
+    /**
+     * Método auxiliar para determinar si una fecha de nacimiento indica que la persona es mayor
+     * de edad en la fecha proporcionada.
+     *
+     * @param fechaNacimiento La fecha de nacimiento del usuario.
+     * @param fechaReferencia La fecha de referencia para calcular la edad.
+     * @return true si el usuario es menor de edad en la fecha proporcionada.
+     */
+    private boolean esMayor(LocalDate fechaNacimiento, LocalDate fechaReferencia) {
+        // Calcula la edad
+        int edad = fechaReferencia.getYear() - fechaNacimiento.getYear();
+        if (fechaNacimiento.plusYears(edad).isAfter(fechaReferencia)) {
+            edad--;
+        }
+
+        // Suponemos que "mayor de edad" es 18 años o más. Ajusta según tu definición.
+        return edad >= 18;
     }
     
     //Para encontrar con usuarios con DNIs idénticos
@@ -106,12 +161,30 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public ArrayList<Usuario> findByFechaRegistro(ArrayList<Usuario> listaUsuarios, LocalDate fechaBusqueda) {
-
+        
+    ArrayList<Usuario> usuariosFiltrados = new ArrayList<>();
+        for (Usuario usuario : listaUsuarios) {
+            // Compara las fechas usando el método equals de la clase Date
+            if (usuario.getFechaRegistro().equals(fechaBusqueda)) {
+                usuariosFiltrados.add(usuario);
+            }
+        }
+        
+        return usuariosFiltrados;
     }
-
+    
     @Override
     public ArrayList<Usuario> findByFechaBaja(ArrayList<Usuario> listaUsuarios, LocalDate fechaBusqueda) {
+    
+    ArrayList<Usuario> usuariosFiltradosBaja = new ArrayList<>();
+        for (Usuario usuario : listaUsuarios) {
+                // Compara las fechas usando el método equals de la clase Date
+                if (usuario.getFechaBaja().equals(fechaBusqueda)) {
+                    usuariosFiltradosBaja.add(usuario);
+                }
+            }
 
+        return usuariosFiltradosBaja;
     }
     
     @Override
@@ -197,4 +270,5 @@ public class UsuarioService implements IUsuarioService{
     public boolean esBisiesto(int anio) {
         return (anio % 4 == 0 && anio % 100 != 0) || (anio % 100 == 0 && anio % 400 == 0);
     }
+
 }
