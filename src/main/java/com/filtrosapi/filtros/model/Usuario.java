@@ -16,7 +16,7 @@ public class Usuario {
     private String apellido;
     private LocalDate fechaRegistro;
     private LocalDate fechaBaja;
-    private LocalDate fechaNacimieno;
+    private LocalDate fechaNacimiento;
     private String dni;
     private String cuil;
     private boolean estaActivo;
@@ -25,12 +25,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(long id, String nombre, String apellido, LocalDate fechaRegistro, LocalDate fechaNacimieno, String dni, String cuil) {
+    public Usuario(long id, String nombre, String apellido, LocalDate fechaRegistro, LocalDate fechaNacimiento, String dni, String cuil) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaRegistro = fechaRegistro;
-        this.fechaNacimieno = fechaNacimieno;
+        this.fechaNacimiento = fechaNacimiento;
         this.dni = dni;
         this.cuil = cuil;
     }

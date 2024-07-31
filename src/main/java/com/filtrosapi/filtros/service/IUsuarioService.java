@@ -46,4 +46,11 @@ public interface IUsuarioService {
     
     public int getCantidadSuscripcionesEnFecha(LocalDate fechaRegistro);
     
+    public boolean validarFecha(int anio, int mes, int dia);
+    
+    public int numeroDeDiasMes (int mes);
+    
+    public boolean mesCorrecto(int mes);
+    
+    public boolean esBisiesto(int anio);
 }

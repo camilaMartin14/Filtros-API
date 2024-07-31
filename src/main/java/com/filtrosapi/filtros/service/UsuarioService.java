@@ -56,7 +56,7 @@ public class UsuarioService implements IUsuarioService{
             usu.setApellido(nuevoApellido);
             usu.setFechaRegistro(nuevaFechaRegistro);
             usu.setFechaBaja(nuevaFechaBaja);
-            usu.setFechaNacimieno(nuevaFechaNacimiento);
+            usu.setFechaNacimiento(nuevaFechaNacimiento);
             usu.setDni(nuevoDni);
             usu.setCuil(nuevoCuil);
             usu.setEstaActivo(nuevoEstaActivo);
@@ -158,5 +158,43 @@ public class UsuarioService implements IUsuarioService{
         ArrayList<Usuario> suscripcionesEnFecha = findByFechaRegistro(new ArrayList<>(listaUsuarios), fechaRegistro);
         
         return suscripcionesEnFecha.size();     
+    }
+
+    @Override
+    public boolean validarFecha(int anio, int mes, int dia) {
+    boolean valido=false;
+
+            if (anio>=0 && (mes>=1 && mes<=12)){
+                if(numeroDeDiasMes(mes) >= dia){
+                    valido=true;
+                }
+            }
+
+            return valido;
+        }    
+    
+    @Override
+    public int numeroDeDiasMes(int mes) {
+        switch (mes) {
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                return 31;
+            case 4: case 6: case 9: case 11:
+                return 30;
+            case 2:
+                LocalDate anioActual = LocalDate.now();
+                return esBisiesto(anioActual.getYear()) ? 29 : 28;
+            default:
+                return 0; // Mes inválido
+        }
+    }
+     
+    @Override
+    public boolean mesCorrecto(int mes) {
+        return mes >= 1 && mes <= 12;
+    }
+
+    @Override
+    public boolean esBisiesto(int anio) {
+        return (anio % 4 == 0 && anio % 100 != 0) || (anio % 100 == 0 && anio % 400 == 0);
     }
 }
